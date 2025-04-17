@@ -1,0 +1,320 @@
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Acknowledgement (u/s 194-Q)</title>
+  <style>
+    p,
+    li,
+    h1,
+    h2 {
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    ul {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-left: 30px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    body {
+      font-family: "Times New Roman", serif;
+      margin: 0;
+      padding: 2cm;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-bottom: 20px;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 21cm;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-top: 20px;
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .note li {
+      color: #900;
+    }
+
+    p {
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    .subject {
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .details {
+      margin: 5px 0 15px 0;
+    }
+
+    .signature-line {
+      margin-top: 50px;
+      border-top: 1px solid #000;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="header">
+      <h1>ACKNOWLEDGEMENT (u/s 194-Q)</h1>
+      <p><strong>Financial Year:</strong> {{ financial_year }}</p>
+    </div>
+
+    <p>Dear Sir/Madam,</p>
+
+    <div class="details">
+      <p><strong>GST No:</strong> {{ gst_number }}</p>
+      <p><strong>PAN No:</strong> {{ pan_number }}</p>
+      <p><strong>TAN No:</strong> {{ tan_number }}</p>
+      <p><strong>Name of the Firm:</strong> {{ company_name }}</p>
+      <p><strong>Location/City:</strong> {{ city }}</p>
+    </div>
+
+    <p class="subject"><strong>Subject:</strong> Acknowledgement of Declaration under Section 194Q of the Income Tax
+      Act, 1961 for Financial Year {{ year_of_filing }}</p>
+
+    <p>This is to acknowledge receipt of your declaration dated <strong>{{ current_date }}</strong> under Section 194Q
+      of the Income Tax Act, 1961, stating that you meet the criteria specified therein.</p>
+
+    <p class="section-title">Details of the Declaration:</p>
+    <ul>
+      <li><strong style="color: red;">
+          You have declared that your turnover/gross receipts from business carried on by you
+          during the immediately preceding financial year
+          {% if turnover == 'yes' %}
+          exceed Rupees Ten Crore.
+          {% else %}
+          does not exceed Rupees Ten Crore.
+          {% endif %}
+        </strong>
+      </li>
+      <li>You have declared that you are compliant with all other conditions specified under section 194Q of the Income
+        Tax Act, 1961.</li>
+    </ul>
+
+    <p class="section-title">Acknowledgement:</p>
+    <p>We acknowledge the receipt of your declaration. Based on the information provided in your declaration, we will
+      proceed with the transactions as per the provisions of Section 194Q of the Income Tax Act, 1961.</p>
+
+    <p class="section-title">Important Note:</p>
+    <ul class="note">
+      <li>This acknowledgement is based solely on the information provided in your declaration.</li>
+      <li>You are solely responsible for the accuracy and completeness of the information provided in your declaration.
+      </li>
+      <li>If any information provided in your declaration is found to be false or incorrect, you will be liable for the
+        consequences as per the Income Tax Act, 1961.</li>
+      <li>This acknowledgement does not absolve you from your responsibilities under any other applicable tax laws.</li>
+      <li>Our company reserves the right to request additional documentation or clarification as required to verify the
+        validity of your declaration.</li>
+    </ul>
+
+    <div class="footer">
+      <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
+      <p><strong>PUNE</strong></p>
+      <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+    </div>
+  </div>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Acknowledgement (u/s 194-Q)</title>
+  <style>
+    p, li, h1, h2 {
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+    }
+    
+    ul {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 30px;
+    }
+    
+    li {
+        margin-bottom: 10px;
+    }
+    body {
+      font-family: "Times New Roman", serif;
+      margin: 0;
+      padding: 2cm;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #000;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    h1 {
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-bottom: 20px;
+    }
+    
+    .content {
+      width: 100%;
+      max-width: 21cm;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-weight: bold;
+      margin-top: 20px;
+      text-decoration: underline;
+    }
+    
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 13px;
+    }
+    
+    ul {
+      margin: 15px 0;
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    .note li {
+      color: #900;
+    }
+    
+    p {
+      margin: 10px 0;
+      text-align: left;
+    }
+    
+    .subject {
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    
+    .details {
+      margin: 5px 0 15px 0;
+    }
+    
+    .signature-line {
+      margin-top: 50px;
+      border-top: 1px solid #000;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="header">
+      <h1>ACKNOWLEDGEMENT (u/s 194-Q)</h1>
+      <p><strong>Financial Year:</strong> {{ financial_year }}</p>
+    </div>
+
+    <p>Dear Sir/Madam,</p>
+
+    <div class="details">
+      <p><strong>GST No:</strong> {{ gst_number }}</p>
+      <p><strong>PAN No:</strong> {{ pan_number }}</p>
+      <p><strong>TAN No:</strong> {{ tan_number }}</p>
+      <p><strong>Name of the Firm:</strong> {{ company_name }}</p>
+      <p><strong>Location/City:</strong> {{ city }}</p>
+    </div>
+
+    <p class="subject"><strong>Subject:</strong> Acknowledgement of Declaration under Section 194Q of the Income Tax Act, 1961 for Financial Year {{ year_of_filing }}</p>
+
+    <p>This is to acknowledge receipt of your declaration dated <strong>{{ current_date }}</strong> under Section 194Q of the Income Tax Act, 1961, stating that you meet the criteria specified therein.</p>
+
+    <p class="section-title">Details of the Declaration:</p>
+    <ul>
+      <li><strong style="color: red;">
+        You have declared that your turnover/gross receipts from business carried on by you 
+        during the immediately preceding financial year 
+        {% if turnover == 'yes' %}
+          exceed Rupees Ten Crore.
+        {% else %}
+          does not exceed Rupees Ten Crore.
+        {% endif %}
+      </strong>
+      </li>
+      <li>You have declared that you are compliant with all other conditions specified under section 194Q of the Income Tax Act, 1961.</li>
+    </ul>
+
+    <p class="section-title">Acknowledgement:</p>
+    <p>We acknowledge the receipt of your declaration. Based on the information provided in your declaration, we will proceed with the transactions as per the provisions of Section 194Q of the Income Tax Act, 1961.</p>
+
+    <p class="section-title">Important Note:</p>
+    <ul class="note">
+      <li>This acknowledgement is based solely on the information provided in your declaration.</li>
+      <li>You are solely responsible for the accuracy and completeness of the information provided in your declaration.</li>
+      <li>If any information provided in your declaration is found to be false or incorrect, you will be liable for the consequences as per the Income Tax Act, 1961.</li>
+      <li>This acknowledgement does not absolve you from your responsibilities under any other applicable tax laws.</li>
+      <li>Our company reserves the right to request additional documentation or clarification as required to verify the validity of your declaration.</li>
+    </ul>
+
+    <div class="footer">
+      <p><strong>For MACLEODS PHARMACEUTICALS LIMITED</strong></p>
+      <p><strong>MUMBAI</strong></p>
+      <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+    </div>
+  </div>
+</body>
+</html>
+
+
+

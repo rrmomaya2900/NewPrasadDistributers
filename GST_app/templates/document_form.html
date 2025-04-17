@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .banner {
+            background: linear-gradient(to right, #51b3eb, #70c1ef);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .radio-group {
+            margin: 15px 0;
+        }
+        .radio-group label {
+            display: inline-block;
+            margin-right: 20px;
+            font-weight: normal;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .error-message {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="banner">
+            <h1>Document Submission for GST: {{ gst_number }}</h1>
+        </div>
+        
+        <form id="currentYearForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label for="year_of_filing">Financial Year:</label>
+            <input type="text" id="year_of_filing" name="year_of_filing" required>
+            
+            <label>Did turnover exceed ₹10 crores?</label>
+            <p style="color: red; font-size: 14px; margin-top: 5px;">
+                *If the turnover exceeds ₹10 crore and the purchases from New Prasad Distributors exceed ₹50 lakh, customer is required to deduct TDS. Else TCS is applicable.
+            </p>
+            <div class="radio-group">
+                <label><input type="radio" name="turnover" value="yes" required> Yes</label>
+                <label><input type="radio" name="turnover" value="no" required> No</label>
+            </div>
+            
+            <button type="submit" id="submitBtn">Submit Documents</button>
+            <div id="errorMessage" class="error-message"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("currentYearForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = document.getElementById("submitBtn");
+            const errorDiv = document.getElementById("errorMessage");
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing...";
+            errorDiv.style.display = "none";
+            
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(await response.text() || "Request failed");
+                }
+                
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/pdf")) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `acknowledgement_{{ gst_number }}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                    
+                    // Redirect after download
+                    window.location.href = `/success_end/?gst_number={{ gst_number }}`;
+                } else {
+                    const data = await response.json();
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                    }
+                }
+            } catch (error) {
+                console.error("Submission error:", error);
+                errorDiv.textContent = "Error: " + error.message;
+                errorDiv.style.display = "block";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Documents";
+            }
+        });
+    </script>
+</body>
+</html>

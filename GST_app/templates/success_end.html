@@ -1,0 +1,149 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .thank-you {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+      <div class="header">
+        <h1><strong>Submission Acknowledged</strong></h1>
+      </div>
+      <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded.</p>
+  
+      <div class="footer">
+        <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
+        <p><strong>PUNE</strong></p>
+        <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+      </div>
+    </div>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="success_end" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        .success-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .button-link {
+            display: inline-block;
+            background-color: #51b3eb;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-link:hover {
+            background-color: #3a9bd5;
+        }
+
+        .pdf-button {
+            background-color: #2e7d32;
+        }
+
+        .pdf-button:hover {
+            background-color: #1b5e20;
+        }
+
+        .button-group {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+      <div class="header">
+        <h1><strong>Submission Acknowledged</strong></h1>
+      </div>
+      <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded. You can download your acknowledgment below.</p>
+
+        <a href="{% url 'generate_updated_pdf' gst_number=gst_number %}" class="button-link pdf-button" target="_blank">
+            Download Acknowledgment PDF
+        </a>
+
+      <div class="footer">
+        <p><strong>For MACLEODS PHARMACEUTICALS LIMITED</strong></p>
+        <p><strong>MUMBAI</strong></p>
+        <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+      </div>
+    </div>
+  </body>
+</html>

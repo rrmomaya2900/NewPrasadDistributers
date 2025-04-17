@@ -1,0 +1,300 @@
+<!-- app_name/templates/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GST Form</title>
+        <style>
+            .form-container {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+            .banner {
+                background: linear-gradient(to right, #51b3eb, #70c1ef);
+                color: white;
+                padding: 10px 0;
+                text-align: center;
+                font-size: 15px;
+                font-weight: bold;
+                border-radius: 10px 10px 0 0;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                letter-spacing: 1px;
+            }
+
+            form {
+                background-color: white;
+                padding: 25px 30px;
+                border-radius: 0 0 10px 10px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                background: #f7f9fc;
+                margin: 0;
+                padding: 20px;
+            }
+    
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+    
+            form {
+                max-width: 700px;
+                margin: 0 auto;
+                background-color: white;
+                padding: 25px 30px;
+                border-radius: 10px;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            }
+    
+            label {
+                display: block;
+                margin: 10px 0 5px;
+                font-weight: bold;
+            }
+    
+            input[type="text"],
+            input[type="date"],
+            input[type="tel"],
+            input[type="file"],
+            textarea {
+                width: 100%;
+                padding: 8px 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+    
+            textarea {
+                height: 80px;
+                resize: vertical;
+            }
+    
+            p {
+                margin: 15px 0 5px;
+                font-weight: bold;
+            }
+    
+            input[type="radio"] {
+                margin-right: 8px;
+            }
+    
+            label input[type="radio"] {
+                margin-right: 5px;
+            }
+    
+            button {
+                display: block;
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 12px;
+                font-size: 16px;
+                margin-top: 20px;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            button:hover {
+                background-color: #45a049;
+            }
+    
+            #responseMessage {
+                text-align: center;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="form-container">
+            <div class="banner">
+                <h1>GST Declaration Form</h1>
+            </div>
+        
+            <form id="gstForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                 <!-- GST NUMBER -->
+                <label for="gst_number">GST Number:</label>
+                <input type="text" id="gst_number" name="gst_number" required><br>
+
+                <!-- DATE OF FILLING -->
+                <label for="year_of_filing">Year of Filing:</label>
+                <input type="text" id="year_of_filing" name="year_of_filing" required><br>
+
+                <!-- COMPANY NAME -->
+                <label for="company_name">Company Name:</label>
+                <input type="text" id="company_name" name="company_name" required><br>
+
+                <!-- COMPANY ADDRESS -->
+                <label for="company_address">Company Address:</label>
+                <textarea id="company_address" name="company_address" required></textarea><br>
+
+                <!-- CITY -->
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required><br>
+
+                <!-- STATE -->
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required><br>
+
+                <!-- PINCODE -->
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" maxlength="6" required><br>
+
+                <!-- OFFICE MOBILE NUMBER -->
+                <label for="office_mobile_number">Office Mobile Number:</label>
+                <input type="tel" id="office_mobile_number" name="office_mobile_number" pattern="[0-9]{10}" required><br>
+
+                <!-- PERSONAL MOBILE NUMBER -->
+                <label for="personal_mobile_number">Personal Mobile Number:</label>
+                <input type="tel" id="personal_mobile_number" name="personal_mobile_number" pattern="[0-9]{10}" required><br>
+
+                <!-- COMPANY EMAIL -->
+                <label for="company_email_address">Company Email Address:</label>
+                <input type="email" id="company_email_address" name="company_email_address" required><br>
+
+                <!-- PAN NUMBER -->
+                <label for="pan_number">PAN Number:</label>
+                <input type="text" id="pan_number" name="pan_number" required><br>
+
+                <!-- DRUG LICENSE NUMBER 20b-->
+                <label for="drug_license_number20b">Drug License Number20b:</label>
+                <input type="text" id="drug_license_number20b" name="drug_license_number20b" required><br>
+
+                <!-- DRUG LICENSE VALIDITY 20b-->
+                <label for="drug_license_validity20b">Drug License Validity20b:</label>
+                <input type="date" id="drug_license_validity20b" name="drug_license_validity20b" required><br>
+
+                <!-- DRUG LICENSE NUMBER 21b-->
+                <label for="drug_license_number21b">Drug License Number21b:</label>
+                <input type="text" id="drug_license_number21b" name="drug_license_number21b" required><br>
+
+                <!-- DRUG LICENSE VALIDITY 21b-->
+                <label for="drug_license_validity21b">Drug License Validity21b:</label>
+                <input type="date" id="drug_license_validity21b" name="drug_license_validity21b" required><br>
+
+                <!-- DRUG LICENSE NUMBER 20d-->
+                <label for="drug_license_number20d">Drug License Number20d:</label>
+                <input type="text" id="drug_license_number20d" name="drug_license_number20d" required><br>
+
+                <!-- DRUG LICENSE VALIDITY 20d-->
+                <label for="drug_license_validity20d">Drug License Validity20d:</label>
+                <input type="date" id="drug_license_validity20d" name="drug_license_validity20d" required><br>
+
+                <!-- Turnover -->
+                <label>Did turnover exceed ₹10 crores in the previous financial year?</label>
+                <p style="color: red; font-size: 14px; margin-top: 5px;">
+                *If the turnover exceeds ₹10 crore and the purchases from New Prasad Distributors exceed ₹50 lakh, customer is required to deduct TDS. Else TCS is applicable.
+                </p>
+                <label>
+                    <input type="radio" name="turnover" value="yes" required> Yes
+                </label>
+                <label>
+                <input type="radio" name="turnover" value="no" required> No
+                </label><br>
+
+                <input type="hidden" id="tds_tcs" name="tds_tcs" value="">
+
+
+             <!-- TAN NUMBER -->
+                <label for="tan_number">TAN Number:</label>
+                <input type="text" id="tan_number" name="tan_number" required><br>
+
+                <!-- CUSTOMER PHOTO -->
+                <label for="customer_photo">Upload your photo:</label>
+                <input type="file" id="customer_photo" name="customer_photo" accept="image/*" required><br>
+
+                <!-- GST CERTIFICATION PHOTO -->
+                <label for="gst_certification_photo">Upload GST Certification photo:</label>
+                <input type="file" id="gst_certification_photo" name="gst_certification_photo" accept="image/*" required><br>
+
+
+                <!-- UDYAN ADHAR PHOTO -->
+                <label for="udyan_adhar_photo">Upload Udyan Adhaar photo:</label>
+                <input type="file" id="udyan_adhar_photo" name="udyan_adhar_photo" accept="image/*" required><br>
+
+                 <!-- PERSONAL PAN PHOTO -->
+                 <label for="personal_pan_photo">Upload Personal Pan photo:</label>
+                 <input type="file" id="personal_pan_photo" name="personal_pan_photo" accept="image/*" required><br>
+
+                 <!-- PERSONAL ADHAAR PHOTO -->
+                 <label for="personal_adhar_photo">Upload Personal Adhaar photo:</label>
+                 <input type="file" id="personal_adhar_photo" name="personal_adhar_photo" accept="image/*" required><br>
+
+
+                <!-- DRUG LICENSE PHOTO20b -->
+                <label for="drug_license_photo20b">Upload Drug License20b photo:</label>
+                <input type="file" id="drug_license_photo20b" name="drug_license_photo20b" accept="image/*" required><br>
+
+                <!-- DRUG LICENSE PHOTO21b -->
+                <label for="drug_license_photo21b">Upload Drug License21b photo:</label>
+                <input type="file" id="drug_license_photo21b" name="drug_license_photo21b" accept="image/*" required><br>
+
+                <!-- DRUG LICENSE PHOTO20d -->
+                <label for="drug_license_photo20d">Upload Drug License20d photo:</label>
+                <input type="file" id="drug_license_photo20d" name="drug_license_photo20d" accept="image/*" required><br>
+
+                <!-- FOOD LICENSE PHOTO -->
+                <label for="food_license_photo">Upload Food License photo:</label>
+                <input type="file" id="food_license_photo" name="food_license_photo" accept="image/*" required><br>
+
+                <!-- SHOP PHOTO -->
+                <label for="shop_photo">Upload shop photo with shop name:</label>
+                <input type="file" id="shop_photo" name="shop_photo" accept="image/*" required><br>
+                
+
+                <button type="submit">Submit</button>
+            </form>
+        
+            <p id="responseMessage"></p>
+        </div>  
+    <script>
+        document.getElementById("gstForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Get the selected turnover value (yes or no)
+    let turnoverValue = document.querySelector('input[name="turnover"]:checked');
+    
+    if (turnoverValue) {
+        // Set the tds_tcs value based on the selected turnover option
+        if (turnoverValue.value === "yes") {
+            document.getElementById("tds_tcs").value = "tds";  // Set to TDS if turnover is 'Yes'
+        } else {
+            document.getElementById("tds_tcs").value = "tcs";  // Set to TCS if turnover is 'No'
+        }
+    }
+
+    // Capture all form data, including the TDS/TCS value
+    let formData = new FormData(this); // Captures all fields, including files and the hidden tds_tcs field
+
+    fetch('/api/submit-gst/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())  // Parse the JSON response
+    .then(data => {
+        if (data.success) {
+            // ✅ Redirect to the success page with gst_number as query param
+            window.location.href = `/success/?gst_number=${encodeURIComponent(data.gst_number)}`;
+        } else {
+            alert("Form submission failed:\n" + JSON.stringify(data.errors, null, 2));
+        }
+    })
+    .catch(error => {
+        console.error("Error submitting form:", error);
+        alert("Something went wrong while submitting the form.");
+    });
+});
+    </script>
+</body>
+</html>

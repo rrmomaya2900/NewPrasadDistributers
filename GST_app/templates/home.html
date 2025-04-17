@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+            background-color: #f0f4f8;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .button-link {
+            background-color: #51b3eb;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            min-width: 250px;
+        }
+
+        .button-link:hover {
+            background-color: #429bd1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Django Project!</h1>
+
+    <div class="button-container">
+        <a href="{% url 'form' %}" class="button-link">New Registration</a>
+        <a href="{% url 'upload_documents' %}" class="button-link">Upload Current Year Documents</a>
+    </div>
+</body>
+</html>
