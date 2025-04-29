@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,28 +12,36 @@
             margin: 0;
             padding: 20px;
         }
+
         .form-container {
             max-width: 700px;
             margin: 0 auto;
             background: white;
             padding: 25px 30px;
             border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
+
         .banner {
             background: linear-gradient(to right, #51b3eb, #70c1ef);
             color: white;
-            padding: 15px 0;
+            padding: 15px 10px;
             text-align: center;
             border-radius: 10px 10px 0 0;
-            margin-bottom: 20px;
+            margin: -25px -30px 20px -30px;
+            box-sizing: border-box;
         }
+
         label {
             display: block;
             margin: 15px 0 5px;
             font-weight: bold;
         }
-        input[type="text"], input[type="file"], select {
+
+        input[type="text"],
+        input[type="file"],
+        select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -40,14 +49,21 @@
             margin-bottom: 15px;
             box-sizing: border-box;
         }
+
         .radio-group {
             margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
         }
+
         .radio-group label {
-            display: inline-block;
-            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
             font-weight: normal;
         }
+
         button {
             background: #4CAF50;
             color: white;
@@ -59,13 +75,16 @@
             font-size: 16px;
             transition: background 0.3s;
         }
+
         button:hover {
             background: #45a049;
         }
+
         button:disabled {
             background: #cccccc;
             cursor: not-allowed;
         }
+
         .error-message {
             color: #d32f2f;
             background: #ffebee;
@@ -74,46 +93,71 @@
             margin-top: 15px;
             display: none;
         }
+
+        /* ✅ Responsive adjustments */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .banner {
+                padding: 12px;
+                font-size: 16px;
+                margin: -20px -20px 20px -20px;
+            }
+
+            button {
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+        }
     </style>
+
 </head>
+
 <body>
     <div class="form-container">
         <div class="banner">
             <h1>Document Submission for GST: {{ gst_number }}</h1>
         </div>
-        
+
         <form id="currentYearForm" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <label for="year_of_filing">Financial Year:</label>
             <input type="text" id="year_of_filing" name="year_of_filing" required>
-            
+
             <label>Did turnover exceed ₹10 crores?</label>
             <p style="color: red; font-size: 14px; margin-top: 5px;">
-                *If the turnover exceeds ₹10 crore and the purchases from New Prasad Distributors exceed ₹50 lakh, customer is required to deduct TDS. Else TCS is applicable.
+                *If the turnover exceeds ₹10 crore and the purchases from New Prasad Distributors exceed ₹50 lakh,
+                customer is required to deduct TDS. Else TCS is applicable.
             </p>
             <div class="radio-group">
                 <label><input type="radio" name="turnover" value="yes" required> Yes</label>
                 <label><input type="radio" name="turnover" value="no" required> No</label>
             </div>
-            
+
             <button type="submit" id="submitBtn">Submit Documents</button>
             <div id="errorMessage" class="error-message"></div>
         </form>
     </div>
 
     <script>
-        document.getElementById("currentYearForm").addEventListener("submit", async function(e) {
+        document.getElementById("currentYearForm").addEventListener("submit", async function (e) {
             e.preventDefault();
-            
+
             const form = this;
             const submitBtn = document.getElementById("submitBtn");
             const errorDiv = document.getElementById("errorMessage");
-            
+
             submitBtn.disabled = true;
             submitBtn.textContent = "Processing...";
             errorDiv.style.display = "none";
-            
+
             try {
                 const response = await fetch(form.action, {
                     method: "POST",
@@ -122,11 +166,11 @@
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(await response.text() || "Request failed");
                 }
-                
+
                 const contentType = response.headers.get("content-type");
                 if (contentType && contentType.includes("application/pdf")) {
                     const blob = await response.blob();
@@ -138,7 +182,7 @@
                     a.click();
                     window.URL.revokeObjectURL(url);
                     a.remove();
-                    
+
                     // Redirect after download
                     window.location.href = `/success_end/?gst_number={{ gst_number }}`;
                 } else {
@@ -158,4 +202,5 @@
         });
     </script>
 </body>
+
 </html>

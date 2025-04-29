@@ -1,69 +1,6 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            text-align: center;
-            padding-top: 100px;
-        }
-
-        .success-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        p {
-            margin-bottom: 25px;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        .thank-you {
-            font-size: 20px;
-            margin-top: 30px;
-        }
-
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 13px;
-            color: #777;
-        }
-    </style>
-</head>
-<body>
-    <div class="content">
-      <div class="header">
-        <h1><strong>Submission Acknowledged</strong></h1>
-      </div>
-      <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded.</p>
-  
-      <div class="footer">
-        <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
-        <p><strong>PUNE</strong></p>
-        <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
-      </div>
-    </div>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="success_end" content="width=device-width, initial-scale=1.0">
@@ -75,6 +12,8 @@
             padding-top: 100px;
             background-color: #f0f4f8;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         .success-container {
@@ -126,24 +65,89 @@
         .button-group {
             margin-top: 30px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .button-link {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .button-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button-link {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 50px;
+                /* Reduced padding for small screens */
+            }
+
+            .success-container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 12px;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+
+            .button-link {
+                padding: 8px 18px;
+                font-size: 12px;
+                max-width: 200px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="content">
-      <div class="header">
-        <h1><strong>Submission Acknowledged</strong></h1>
-      </div>
-      <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded. You can download your acknowledgment below.</p>
+        <div class="header">
+            <h1><strong>Submission Acknowledged</strong></h1>
+        </div>
+        <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded. You
+            can download your acknowledgment below.</p>
 
         <a href="{% url 'generate_updated_pdf' gst_number=gst_number %}" class="button-link pdf-button" target="_blank">
             Download Acknowledgment PDF
         </a>
 
-      <div class="footer">
-        <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
-        <p><strong>PUNE</strong></p>
-        <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
-      </div>
+        <div class="footer">
+            <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
+            <p><strong>PUNE</strong></p>
+            <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>

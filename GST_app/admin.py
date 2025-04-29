@@ -14,23 +14,66 @@ def download_selected_excel(modeladmin, request, queryset):
     sheet.title = "GST Declarations"
 
     headers = [
-        'GST Number', 'Year of Filing', 'Company Name',
-        'PAN Card Number', 'Drug License20B Number',
-        'Drug License21B Number', 'Drug License20D Number', 'TAN Number',
+        'gst_number',
+        'company_name',
+        'year_of_filing',
+        'city',
+        'state',
+        'office_mobile_number',
+        'personal_mobile_number',
+        'pan_number',
+        'company_email_address',
+        'drug_license_number20b',
+        'drug_license_number21b',
+        'drug_license_number20d',
+        'tan_number',
+        'turnover',
+        'tds_tcs',
+        'customer_photo',
+        'gst_certification_photo',
+        'udyan_adhar_photo',
+        'personal_pan_photo',
+        'personal_adhar_photo',
+        'drug_license_photo20b',
+        'drug_license_photo21b',
+        'drug_license_photo20d',
+        'food_license_photo',
+        'shop_photo',
+        'acknowledgement_pdf_link',
+
     ]
     sheet.append(headers)
 
     for obj in queryset:
         row = [
-            obj.gst_number,
-            obj.year_of_filing,
-            obj.company_name,
-            obj.pan_number,
-            obj.drug_license_number20b,
-            obj.drug_license_number21b,
-            obj.drug_license_number20d,
-            obj.tan_number
-        ]
+        obj.gst_number,
+        obj.company_name,
+        obj.year_of_filing,
+        obj.city,
+        obj.state,
+        obj.office_mobile_number,
+        obj.personal_mobile_number,
+        obj.pan_number,
+        obj.company_email_address,
+        obj.drug_license_number20b,
+        obj.drug_license_number21b,
+        obj.drug_license_number20d,
+        obj.tan_number,
+        obj.turnover,
+        obj.tds_tcs,
+        obj.customer_photo.url if obj.customer_photo else "",
+        obj.gst_certification_photo.url if obj.gst_certification_photo else "",
+        obj.udyan_adhar_photo.url if obj.udyan_adhar_photo else "",
+        obj.personal_pan_photo.url if obj.personal_pan_photo else "",
+        obj.personal_adhar_photo.url if obj.personal_adhar_photo else "",
+        obj.drug_license_photo20b.url if obj.drug_license_photo20b else "",
+        obj.drug_license_photo21b.url if obj.drug_license_photo21b else "",
+        obj.drug_license_photo20d.url if obj.drug_license_photo20d else "",
+        obj.food_license_photo.url if obj.food_license_photo else "",
+        obj.shop_photo.url if obj.shop_photo else "",
+        obj.acknowledgement_pdf_url if obj.acknowledgement_pdf_url else "",
+    ]
+
         sheet.append(row)
 
     # Write workbook to memory

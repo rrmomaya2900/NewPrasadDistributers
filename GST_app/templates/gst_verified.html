@@ -1,51 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>GST Verified</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f9;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            text-align: center;
         }
 
         h1 {
-            text-align: center;
-            margin-top: 50px;
             color: #d9534f;
+            margin-bottom: 20px;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            /* Fluid typography */
         }
 
         p {
-            text-align: center;
-            font-size: 18px;
             color: #333;
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            margin: 0 auto 30px;
+            max-width: 90%;
+            line-height: 1.5;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px auto;
         }
 
         .button-link {
-            display: block;
-            width: fit-content;
-            margin: 30px auto;
-            padding: 12px 24px;
             background-color: #007bff;
             color: white;
+            padding: 12px 24px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
 
         .button-link:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments for larger screens */
+        @media (min-width: 768px) {
+            body {
+                padding: 50px 20px;
+            }
+
+            .button-container {
+                gap: 30px;
+            }
+
+            .button-link {
+                min-width: 250px;
+                width: auto;
+            }
         }
     </style>
 </head>
+
 <body>
     <h1>GST Number Verified</h1>
     <p>The GST number <strong>{{ gst_number }}</strong> was successfully verified.</p>
     <a href="{% url 'document_form' %}" class="button-link">Proceed to Upload Documents</a>
 </body>
+
 </html>

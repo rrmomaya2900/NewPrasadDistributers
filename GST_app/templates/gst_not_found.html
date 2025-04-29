@@ -1,52 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>GST Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f6f7;
             margin: 0;
-            padding: 0;
         }
 
         h1 {
-            text-align: center;
-            margin-top: 50px;
             color: #d9534f;
+            margin-bottom: 30px;
         }
 
         p {
-            text-align: center;
-            font-size: 18px;
             color: #333;
+            margin: 10px auto;
+            max-width: 90%;
+            padding-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px auto;
         }
 
         .button-link {
-            display: block;
-            width: fit-content;
-            margin: 30px auto;
-            padding: 12px 24px;
             background-color: #007bff;
             color: white;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
             transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+            box-sizing: border-box;
         }
 
         .button-link:hover {
             background-color: #0056b3;
         }
+
+        /* Responsive adjustments for larger screens */
+        @media (min-width: 600px) {
+            body {
+                padding: 50px 20px;
+            }
+
+            .button-container {
+                gap: 30px;
+            }
+
+            .button-link {
+                min-width: 250px;
+                width: auto;
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>GST Number Not Found</h1>
     <p>The GST number <strong>{{ gst_number }}</strong> was not found in our records.</p>
     <p>Please register to proceed.</p>
     <a href="{% url 'form' %}" class="button-link">Register Now</a>
 </body>
+
 </html>

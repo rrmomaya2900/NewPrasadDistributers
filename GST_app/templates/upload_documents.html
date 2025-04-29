@@ -1,96 +1,75 @@
-<!-- templates/upload_documents.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Upload GST Docs</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 100px;
-            background-color: #f0f4f8;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
-        }
-        form {
-            display: inline-block;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px #ccc;
-        }
-        input[type="text"], button {
-            font-size: 16px;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-        button {
-            background-color: #51b3eb;
-            color: white;
-            border: none;
-        }
-        button:hover {
-            background-color: #429bd1;
-        }
-    </style>
-</head>
-<body>
-    <h1>Verify Your GST Number</h1>
-    <form method="POST" action="{% url 'verify_gst' %}">
-        {% csrf_token %}
-        <input type="text" name="gst_number" placeholder="Enter GST Number" required />
-        <br>
-        <button type="submit">Verify</button>
-    </form>
-</body>
-</html> -->
-
 <!-- templates/upload_documents.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Upload GST Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding-top: 100px;
+            padding: 20px;
             background-color: #f0f4f8;
+            margin: 0;
         }
+
         h1 {
             color: #333;
             margin-bottom: 30px;
+            font-size: 1.5em;
         }
+
         form {
             display: inline-block;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px #ccc;
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        input[type="text"], button {
-            font-size: 16px;
-            padding: 10px;
-            margin: 10px;
+
+        input[type="text"],
+        button {
+            padding: 12px;
+            margin: 10px 0;
             border-radius: 6px;
             border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
         }
+
         button {
             background-color: #51b3eb;
             color: white;
             border: none;
+            cursor: pointer;
         }
+
         button:hover {
             background-color: #429bd1;
         }
+
+        /* Responsive adjustments */
+        @media (min-width: 600px) {
+            form {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+        }
     </style>
+
 </head>
+
 <body>
     <h1>Verify Your GST Number</h1>
     <form method="POST" action="{% url 'verify_gst' %}">
@@ -100,4 +79,5 @@
         <button type="submit">Verify</button>
     </form>
 </body>
+
 </html>
