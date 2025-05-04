@@ -41,8 +41,8 @@
 
         input::placeholder,
         textarea::placeholder {
-            text-align: center;
-            /* Center placeholder text */
+            text-align: left
+                /* CHANGE */
         }
 
         input,
@@ -68,7 +68,7 @@
         textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
+
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 14px;
@@ -142,7 +142,6 @@
         }
     </style>
 
-
 </head>
 
 <body>
@@ -156,11 +155,11 @@
 
             <!-- GST NUMBER -->
             <label for="gst_number">GST Number:</label>
-            <input type="text" id="gst_number" name="gst_number" required><br>
+            <input type="text" id="gst_number" name="gst_number" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" placeholder="e.g., 22AAAAA9999A1Z5" required><br>
 
             <!-- DATE OF FILLING -->
             <label for="year_of_filing">Year of Filing:</label>
-            <input type="text" id="year_of_filing" name="year_of_filing" required><br>
+            <input type="text" id="year_of_filing" name="year_of_filing" placeholder="e.g., 2024-2025" required><br>
 
             <!-- COMPANY NAME -->
             <label for="company_name">Company Name:</label>
@@ -180,7 +179,7 @@
 
             <!-- PINCODE -->
             <label for="pincode">Pincode:</label>
-            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" maxlength="6" required><br>
+            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}"  maxlength="6" required><br>
 
             <!-- OFFICE MOBILE NUMBER -->
             <label for="office_mobile_number">Office Mobile Number:</label>
@@ -193,15 +192,15 @@
 
             <!-- COMPANY EMAIL -->
             <label for="company_email_address">Company Email Address:</label>
-            <input type="email" id="company_email_address" name="company_email_address" required><br>
+            <input type="email" id="company_email_address" name="company_email_address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required><br>
 
             <!-- PAN NUMBER -->
             <label for="pan_number">PAN Number:</label>
-            <input type="text" id="pan_number" name="pan_number" required><br>
+            <input type="text" id="pan_number" name="pan_number" pattern="^[A-Z]{5}[0-9]{4}[A-Z]$" placeholder="e.g., AAAAA9999A" required><br>
 
             <!-- DRUG LICENSE NUMBER 20b-->
             <label for="drug_license_number20b">Drug License Number20b:</label>
-            <input type="text" id="drug_license_number20b" name="drug_license_number20b" required><br>
+            <input type="text" id="drug_license_number20b" name="drug_license_number20b" pattern="^[A-Z]{3}-[0-9]{5}$" placeholder="e.g., ABC-12345" required><br>
 
             <!-- DRUG LICENSE VALIDITY 20b-->
             <label for="drug_license_validity20b">Drug License Validity20b:</label>
@@ -209,7 +208,7 @@
 
             <!-- DRUG LICENSE NUMBER 21b-->
             <label for="drug_license_number21b">Drug License Number21b:</label>
-            <input type="text" id="drug_license_number21b" name="drug_license_number21b" required><br>
+            <input type="text" id="drug_license_number21b" name="drug_license_number21b" pattern="^[A-Z]{3}-[0-9]{5}$" placeholder="e.g., ABC-12345" required><br>
 
             <!-- DRUG LICENSE VALIDITY 21b-->
             <label for="drug_license_validity21b">Drug License Validity21b:</label>
@@ -217,7 +216,7 @@
 
             <!-- DRUG LICENSE NUMBER 20d-->
             <label for="drug_license_number20d">Drug License Number20d:</label>
-            <input type="text" id="drug_license_number20d" name="drug_license_number20d" required><br>
+            <input type="text" id="drug_license_number20d" name="drug_license_number20d" pattern="^[A-Z]{3}-[0-9]{5}$" placeholder="e.g., ABC-12345" required><br>
 
             <!-- DRUG LICENSE VALIDITY 20d-->
             <label for="drug_license_validity20d">Drug License Validity20d:</label>
@@ -241,7 +240,11 @@
 
             <!-- TAN NUMBER -->
             <label for="tan_number">TAN Number:</label>
-            <input type="text" id="tan_number" name="tan_number" required><br>
+            <input type="text" id="tan_number" name="tan_number" pattern="^[A-Z]{4}[0-9]{5}[A-Z]$" placeholder="e.g., AAAA99999A" required><br>
+
+            <p style="color: red; font-size: 14px; margin-top: 5px;">
+                *Image size for all fields should not exceed 1 MB.
+            </p>
 
             <!-- CUSTOMER PHOTO -->
             <label for="customer_photo">Upload your photo:</label>
@@ -253,8 +256,8 @@
                 required><br>
 
 
-            <!-- UDYAN ADHAR PHOTO -->
-            <label for="udyan_adhar_photo">Upload Udyan Adhaar photo:</label>
+            <!-- UDYAM ADHAR PHOTO -->
+            <label for="udyan_adhar_photo">Upload Udyam Aadhaar Certificate photo:</label>
             <input type="file" id="udyan_adhar_photo" name="udyan_adhar_photo" accept="image/*" required><br>
 
             <!-- PERSONAL PAN PHOTO -->
@@ -262,7 +265,7 @@
             <input type="file" id="personal_pan_photo" name="personal_pan_photo" accept="image/*" required><br>
 
             <!-- PERSONAL ADHAAR PHOTO -->
-            <label for="personal_adhar_photo">Upload Personal Adhaar photo:</label>
+            <label for="personal_adhar_photo">Upload Personal Aadhaar photo:</label>
             <input type="file" id="personal_adhar_photo" name="personal_adhar_photo" accept="image/*" required><br>
 
 
@@ -294,7 +297,12 @@
     </div>
     <script>
         document.getElementById("gstForm").addEventListener("submit", function (event) {
+            console.log(event);
             event.preventDefault();
+
+            console.log(this.checkValidity(), 'isValid');
+
+
 
             // Get the selected turnover value (yes or no)
             let turnoverValue = document.querySelector('input[name="turnover"]:checked');
@@ -319,6 +327,7 @@
                 .then(data => {
                     if (data.success) {
                         // ✅ Redirect to the success page with gst_number as query param
+                        document.getElementById("gstForm").reset();
                         window.location.href = `/success/?gst_number=${encodeURIComponent(data.gst_number)}`;
                     } else {
                         alert("Form submission failed:\n" + JSON.stringify(data.errors, null, 2));
@@ -329,6 +338,14 @@
                     alert("Something went wrong while submitting the form.");
                 });
         });
+        // ✅ Clear the form if user clicks "Back" button
+        window.onload = function () {
+            if (performance && performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
+                document.getElementById("gstForm").reset();
+            }
+        };
+
+
     </script>
 </body>
 

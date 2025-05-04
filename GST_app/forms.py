@@ -43,9 +43,14 @@ class GSTForm(forms.ModelForm):
         }
         
     def clean_gst_number(self):
+        print('clean_gst_number')
         gst_number = self.cleaned_data.get('gst_number')
-        if not re.match(r'^[0-9A-Z]{15}$', gst_number):
-            raise forms.ValidationError("Invalid GST Number format. It should be 15 characters long.")
+        gst_regex = r'^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$'
+        print('regex')
+        if not re.match(gst_regex, gst_number):
+            raise forms.ValidationError(
+            "Invalid GST Number format. Example: 27ABCDE1234F1Z5"
+        )
         return gst_number
 
     def clean_pan_number(self):
@@ -79,18 +84,21 @@ class GSTForm(forms.ModelForm):
         return turnover
 
     def clean_office_mobile_number(self):
+        print('clean_office_mobile_number')
         number = self.cleaned_data.get('office_mobile_number')
         if not re.match(r'^\d{10}$', number):
             raise forms.ValidationError("Invalid Office Mobile Number. It should be 10 digits.")
         return number
 
     def clean_personal_mobile_number(self):
+        print('clean_personal_mobile_number')
         number = self.cleaned_data.get('personal_mobile_number')
         if not re.match(r'^\d{10}$', number):
             raise forms.ValidationError("Invalid Personal Mobile Number. It should be 10 digits.")
         return number
 
     def clean(self):
+        print('self clean')
         cleaned_data = super().clean()
         for field_name in [
             'customer_photo', 'gst_certification_photo', 'udyan_adhar_photo', 'personal_pan_photo',

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="success_end" content="width=device-width, initial-scale=1.0">
@@ -15,7 +14,7 @@
             margin: 0;
             padding: 0;
         }
-
+    
         .success-container {
             max-width: 600px;
             margin: 0 auto;
@@ -24,18 +23,18 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
+    
         h2 {
             color: #2e7d32;
             margin-bottom: 20px;
         }
-
+    
         p {
             margin-bottom: 25px;
             font-size: 16px;
             line-height: 1.6;
         }
-
+    
         .button-link {
             display: inline-block;
             background-color: #51b3eb;
@@ -49,105 +48,139 @@
             border: none;
             cursor: pointer;
         }
-
+    
         .button-link:hover {
             background-color: #3a9bd5;
         }
-
+    
         .pdf-button {
             background-color: #2e7d32;
         }
-
+    
         .pdf-button:hover {
             background-color: #1b5e20;
         }
-
+        
+        .home-button {
+            background-color: #429bd1;
+        }
+        
+        .home-button:hover {
+            background-color: #5a6268;
+        }
+    
         .button-group {
             margin-top: 30px;
         }
-
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        .thank-you {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+        }
+    
         /* Responsive Design */
         @media (max-width: 768px) {
-            .success-container {
+            .content {
                 padding: 20px;
             }
-
-            h2 {
-                font-size: 20px;
-                margin-bottom: 15px;
+    
+            .header h1 {
+                font-size: 24px;
             }
-
-            p {
-                font-size: 14px;
-                line-height: 1.5;
-                margin-bottom: 20px;
+    
+            .thank-you {
+                font-size: 16px;
             }
-
+    
             .button-link {
                 padding: 10px 20px;
                 font-size: 14px;
             }
-
+    
             .button-group {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
-
+    
             .button-link {
                 width: 100%;
                 max-width: 250px;
                 margin-bottom: 10px;
             }
         }
-
+    
         @media (max-width: 480px) {
             body {
                 padding-top: 50px;
-                /* Reduced padding for small screens */
             }
-
-            .success-container {
+    
+            .content {
                 padding: 15px;
             }
-
-            h2 {
-                font-size: 18px;
+    
+            .header h1 {
+                font-size: 20px;
             }
-
-            p {
-                font-size: 12px;
-                line-height: 1.4;
-                margin-bottom: 15px;
+    
+            .thank-you {
+                font-size: 14px;
             }
-
+    
             .button-link {
                 padding: 8px 18px;
                 font-size: 12px;
                 max-width: 200px;
             }
+            
+            .footer {
+                font-size: 12px;
+            }
         }
-    </style>
+    </style>    
 </head>
-
 <body>
     <div class="content">
-        <div class="header">
-            <h1><strong>Submission Acknowledged</strong></h1>
-        </div>
-        <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded. You
-            can download your acknowledgment below.</p>
+      <div class="header">
+        <h1><strong>Submission Acknowledged</strong></h1>
+      </div>
+      <p class="thank-you">Thank you for submitting the form.<br>Your declaration has been successfully recorded. You can download your acknowledgment below.</p>
 
-        <a href="{% url 'generate_updated_pdf' gst_number=gst_number %}" class="button-link pdf-button" target="_blank">
-            Download Acknowledgment PDF
-        </a>
+      <div class="button-group">
+          <a href="{% url 'generate_updated_pdf' gst_number=gst_number %}" class="button-link pdf-button" target="_blank" onclick="resetForm()">
+              Download Acknowledgment PDF
+          </a>
+          <a href="{% url 'back_to_home' %}" class="button-link home-button" onclick="resetForm()">
+              Return to Home
+          </a>
+      </div>
 
-        <div class="footer">
-            <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
-            <p><strong>PUNE</strong></p>
-            <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
-        </div>
+      <div class="footer">
+        <p><strong>For NEW PRASAD DISTRIBUTERS</strong></p>
+        <p><strong>PUNE</strong></p>
+        <p><strong>Date:</strong> {{ current_date }} &nbsp;&nbsp; <strong>Time:</strong> {{ current_time }}</p>
+      </div>
     </div>
 </body>
-
 </html>

@@ -62,6 +62,14 @@
             background-color: #1b5e20;
         }
 
+        .home-button {
+            background-color: #429bd1;
+        }
+
+        .home-button:hover {
+            background-color: #3a95cd;
+        }
+
         .button-group {
             margin-top: 30px;
         }
@@ -135,10 +143,15 @@
         <h2>Form Submitted Successfully!</h2>
         <p>Your GST declaration form has been submitted. You can download your acknowledgment below.</p>
 
-        <a href="{% url 'generate_acknowledgement_pdf' gst_number=gst_number %}" class="button-link pdf-button"
-            target="_blank">
-            Download Acknowledgment PDF
-        </a>
+        <div class="button-group">
+            <a href="{% url 'generate_acknowledgement_pdf' gst_number=gst_number %}" class="button-link pdf-button"
+                target="_blank" onclick="resetForm()">
+                Download Acknowledgment PDF
+            </a>
+            <a href="{% url 'back_to_home' %}" class="button-link home-button" onclick="resetForm()">
+                Return to Home
+            </a>
+        </div>
     </div>
 </body>
 

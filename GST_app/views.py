@@ -29,16 +29,128 @@ def home(request):
     return render(request, 'home.html')
 
 # View for GST Form (Template-Based Submission)
+# def gst_form_view(request):
+#     if request.method == 'POST':
+#         form = GSTForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             # 1. Save text data to GSTDeclaration
+#             tds_tcs_value = 'tds' if form.cleaned_data['turnover'] == 'yes' else 'tcs'
+            
+#             # 1. Save text data to GSTDeclaration
+#             gst_instance = GSTDeclaration.objects.create(
+#                 gst_number=form.cleaned_data['gst_number'],
+#                 year_of_filing=form.cleaned_data['year_of_filing'],
+#                 company_name=form.cleaned_data['company_name'],
+#                 company_address=form.cleaned_data['company_address'],
+#                 city=form.cleaned_data['city'],
+#                 state=form.cleaned_data['state'],
+#                 pincode=form.cleaned_data['pincode'],
+#                 office_mobile_number=form.cleaned_data['office_mobile_number'],
+#                 personal_mobile_number=form.cleaned_data['personal_mobile_number'],
+#                 pan_number=form.cleaned_data['pan_number'],
+#                 company_email_address=form.cleaned_data['company_email_address'],
+#                 drug_license_number20b=form.cleaned_data.get('drug_license_number20b'),
+#                 drug_license_validity20b=form.cleaned_data.get('drug_license_validity20b'),
+#                 drug_license_number21b=form.cleaned_data.get('drug_license_number21b'),
+#                 drug_license_validity21b=form.cleaned_data.get('drug_license_validity21b'),
+#                 drug_license_number20d=form.cleaned_data.get('drug_license_number20d'),
+#                 drug_license_validity20d=form.cleaned_data.get('drug_license_validity20d'),
+#                 tan_number=form.cleaned_data.get('tan_number'),
+#                 turnover=form.cleaned_data['turnover'],
+#                 tds_tcs = 'tds' if form.cleaned_data.get('turnover') == 'yes' else 'tcs',  # Set based on turnover
+#             )
+            
+#             gst_number = form.cleaned_data['gst_number']
+#             file_fields = [
+#                 ('customer_photo', 'customer_photo.jpg'),
+#                 ('gst_certification_photo', 'gst_certification.jpg'),
+#                 ('udyan_adhar_photo', 'udyan_adhar.jpg'),
+#                 ('personal_pan_photo', 'personal_pan.jpg'),
+#                 ('personal_adhar_photo', 'personal_adhar.jpg'),
+#                 ('drug_license_photo20b', 'drug_license_photo20b.jpg'),
+#                 ('drug_license_photo21b', 'drug_license_photo21b.jpg'),
+#                 ('drug_license_photo20d', 'drug_license_photo20d.jpg'),
+#                 ('food_license_photo', 'food_license_photo.jpg'),
+#                 ('shop_photo', 'shop_photo.jpg'),
+#             ]
+#             for field_name, file_name in file_fields:
+#                 file = request.FILES.get(field_name)
+#                 if file:
+#                     upload_file_to_s3(file, f"{gst_number}/{file_name}")
+            
+            
+#             customer_url = upload_file_to_s3(request.FILES['customer_photo'], f"{gst_number}/customer_photo.jpg")
+#             gst_certification_url = upload_file_to_s3(request.FILES['gst_certification_photo'], f"{gst_number}/gst_certification.jpg")
+#             udyan_adhar_url = upload_file_to_s3(request.FILES['udyan_adhar_photo'], f"{gst_number}/udyan_adhar.jpg")
+#             personal_pan_url = upload_file_to_s3(request.FILES['personal_pan_photo'], f"{gst_number}/personal_pan.jpg")
+#             personal_adhar_url = upload_file_to_s3(request.FILES['personal_adhar_photo'], f"{gst_number}/personal_adhar.jpg")
+#             drug_license_url20b = upload_file_to_s3(request.FILES['drug_license_photo20b'], f"{gst_number}/drug_license_photo20b.jpg")
+#             drug_license_url21b = upload_file_to_s3(request.FILES['drug_license_photo21b'], f"{gst_number}/drug_license_photo21b.jpg")
+#             drug_license_url20d = upload_file_to_s3(request.FILES['drug_license_photo20d'], f"{gst_number}/drug_license_photo20d.jpg")
+#             food_license_url = upload_file_to_s3(request.FILES['food_license_photo'], f"{gst_number}/food_license_photo.jpg")
+#             shop_url = upload_file_to_s3(request.FILES['shop_photo'], f"{gst_number}/shop_photo.jpg")
+            
+#             gst_instance.customer_photo_url = customer_url
+#             gst_instance.gst_certification_photo_url = gst_certification_url
+#             gst_instance.udyan_adhar_photo_url = udyan_adhar_url
+#             gst_instance.personal_pan_photo_url = personal_pan_url
+#             gst_instance.personal_adhar_photo_url = personal_adhar_url
+#             gst_instance.drug_license_photo_url20b = drug_license_url20b
+#             gst_instance.drug_license_photo_url21b = drug_license_url21b
+#             gst_instance.drug_license_photo_url20d = drug_license_url20d
+#             gst_instance.food_license_photo_url = food_license_url
+#             gst_instance.shop_photo_url = shop_url
+
+#             gst_instance.save()
+
+
+#             print("Redirecting to success page...")
+#             # return redirect('success_page')
+#             # return redirect(f'/success/?gst_number={gst_number}')
+#             request.session['gst_number'] = gst_number
+#             return redirect('success_page')
+#         else:
+#             print("Form Errors:", form.errors)
+
+#     else:
+#         form = GSTForm()
+
+#     return render(request, 'form.html', {'form': form})
+
+    
+# @api_view(['POST'])
+# def submit_gst_form(request):
+#     print("Incoming Data:", request.data)
+#     serializer = GSTDeclarationSerializer(data=request.data)
+
+#     if serializer.is_valid():
+#         instance = serializer.save()
+#         gst_number = instance.gst_number
+#         return Response({
+#             "success": True,
+#             "gst_number": instance.gst_number
+#         })  # ✅ Send JSON instead of redirect
+
+#     print("Serializer Errors:", serializer.errors)
+#     return Response({
+#         "success": False,
+#         "errors": serializer.errors
+#     }, status=status.HTTP_400_BAD_REQUEST)
+
+
+# def success_page(request):
+#     gst_number = request.GET.get('gst_number')  # or get it from the session if stored
+#     return render(request, 'success.html', {'gst_number': gst_number})
+
 def gst_form_view(request):
     if request.method == 'POST':
         form = GSTForm(request.POST, request.FILES)
         if form.is_valid():
-            # 1. Save text data to GSTDeclaration
-            tds_tcs_value = 'tds' if form.cleaned_data['turnover'] == 'yes' else 'tcs'
-            
-            # 1. Save text data to GSTDeclaration
+            gst_number = form.cleaned_data['gst_number']
+
+            # Save text data to GSTDeclaration
             gst_instance = GSTDeclaration.objects.create(
-                gst_number=form.cleaned_data['gst_number'],
+                gst_number=gst_number,
                 year_of_filing=form.cleaned_data['year_of_filing'],
                 company_name=form.cleaned_data['company_name'],
                 company_address=form.cleaned_data['company_address'],
@@ -57,67 +169,41 @@ def gst_form_view(request):
                 drug_license_validity20d=form.cleaned_data.get('drug_license_validity20d'),
                 tan_number=form.cleaned_data.get('tan_number'),
                 turnover=form.cleaned_data['turnover'],
-                tds_tcs = 'tds' if form.cleaned_data.get('turnover') == 'yes' else 'tcs',  # Set based on turnover
+                tds_tcs='tds' if form.cleaned_data['turnover'] == 'yes' else 'tcs',
             )
-            
-            gst_number = form.cleaned_data['gst_number']
-            file_fields = [
-                ('customer_photo', 'customer_photo.jpg'),
-                ('gst_certification_photo', 'gst_certification.jpg'),
-                ('udyan_adhar_photo', 'udyan_adhar.jpg'),
-                ('personal_pan_photo', 'personal_pan.jpg'),
-                ('personal_adhar_photo', 'personal_adhar.jpg'),
-                ('drug_license_photo20b', 'drug_license_photo20b.jpg'),
-                ('drug_license_photo21b', 'drug_license_photo21b.jpg'),
-                ('drug_license_photo20d', 'drug_license_photo20d.jpg'),
-                ('food_license_photo', 'food_license_photo.jpg'),
-                ('shop_photo', 'shop_photo.jpg'),
-            ]
-            for field_name, file_name in file_fields:
+
+            # File uploads to S3 and setting URL fields
+            file_fields = {
+                'customer_photo': 'customer_photo.jpg',
+                'gst_certification_photo': 'gst_certification.jpg',
+                'udyan_adhar_photo': 'udyan_adhar.jpg',
+                'personal_pan_photo': 'personal_pan.jpg',
+                'personal_adhar_photo': 'personal_adhar.jpg',
+                'drug_license_photo20b': 'drug_license_photo20b.jpg',
+                'drug_license_photo21b': 'drug_license_photo21b.jpg',
+                'drug_license_photo20d': 'drug_license_photo20d.jpg',
+                'food_license_photo': 'food_license_photo.jpg',
+                'shop_photo': 'shop_photo.jpg',
+            }
+
+            for field_name, file_name in file_fields.items():
                 file = request.FILES.get(field_name)
                 if file:
-                    upload_file_to_s3(file, f"{gst_number}/{file_name}")
-            
-            
-            customer_url = upload_file_to_s3(request.FILES['customer_photo'], f"{gst_number}/customer_photo.jpg")
-            gst_certification_url = upload_file_to_s3(request.FILES['gst_certification_photo'], f"{gst_number}/gst_certification.jpg")
-            udyan_adhar_url = upload_file_to_s3(request.FILES['udyan_adhar_photo'], f"{gst_number}/udyan_adhar.jpg")
-            personal_pan_url = upload_file_to_s3(request.FILES['personal_pan_photo'], f"{gst_number}/personal_pan.jpg")
-            personal_adhar_url = upload_file_to_s3(request.FILES['personal_adhar_photo'], f"{gst_number}/personal_adhar.jpg")
-            drug_license_url20b = upload_file_to_s3(request.FILES['drug_license_photo20b'], f"{gst_number}/drug_license_photo20b.jpg")
-            drug_license_url21b = upload_file_to_s3(request.FILES['drug_license_photo21b'], f"{gst_number}/drug_license_photo21b.jpg")
-            drug_license_url20d = upload_file_to_s3(request.FILES['drug_license_photo20d'], f"{gst_number}/drug_license_photo20d.jpg")
-            food_license_url = upload_file_to_s3(request.FILES['food_license_photo'], f"{gst_number}/food_license_photo.jpg")
-            shop_url = upload_file_to_s3(request.FILES['shop_photo'], f"{gst_number}/shop_photo.jpg")
-            
-            gst_instance.customer_photo_url = customer_url
-            gst_instance.gst_certification_photo_url = gst_certification_url
-            gst_instance.udyan_adhar_photo_url = udyan_adhar_url
-            gst_instance.personal_pan_photo_url = personal_pan_url
-            gst_instance.personal_adhar_photo_url = personal_adhar_url
-            gst_instance.drug_license_photo_url20b = drug_license_url20b
-            gst_instance.drug_license_photo_url21b = drug_license_url21b
-            gst_instance.drug_license_photo_url20d = drug_license_url20d
-            gst_instance.food_license_photo_url = food_license_url
-            gst_instance.shop_photo_url = shop_url
+                    url = upload_file_to_s3(file, f"{gst_number}/{file_name}")
+                    setattr(gst_instance, f"{field_name}_url", url)
 
             gst_instance.save()
 
-
-            print("Redirecting to success page...")
-            # return redirect('success_page')
-            # return redirect(f'/success/?gst_number={gst_number}')
             request.session['gst_number'] = gst_number
             return redirect('success_page')
         else:
-            print("Form Errors:", form.errors)
-
+            print("Form Errors:", form.errors.as_json())
     else:
         form = GSTForm()
 
     return render(request, 'form.html', {'form': form})
 
-    
+
 @api_view(['POST'])
 def submit_gst_form(request):
     print("Incoming Data:", request.data)
@@ -125,21 +211,20 @@ def submit_gst_form(request):
 
     if serializer.is_valid():
         instance = serializer.save()
-        gst_number = instance.gst_number
         return Response({
             "success": True,
             "gst_number": instance.gst_number
-        })  # ✅ Send JSON instead of redirect
-
-    print("Serializer Errors:", serializer.errors)
-    return Response({
-        "success": False,
-        "errors": serializer.errors
-    }, status=status.HTTP_400_BAD_REQUEST)
+        })
+    else:
+        print("Serializer Errors:", serializer.errors)
+        return Response({
+            "success": False,
+            "errors": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 def success_page(request):
-    gst_number = request.GET.get('gst_number')  # or get it from the session if stored
+    gst_number = request.session.get('gst_number')
     return render(request, 'success.html', {'gst_number': gst_number})
 
 # API to Get GST Details by GST Number
@@ -413,4 +498,5 @@ def success_end(request):
         'current_time': datetime.datetime.now().strftime("%I:%M %p"),
     })
     
-
+def back_to_home(request):
+    return render(request, 'home.html')
