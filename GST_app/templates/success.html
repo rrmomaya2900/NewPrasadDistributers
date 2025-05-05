@@ -148,6 +148,11 @@
                 target="_blank" onclick="resetForm()">
                 Download Acknowledgment PDF
             </a>
+            {% if gst_number %}
+                <p>GST Number: {{ gst_number }}</p>
+            {% else %}
+                <p>No GST number provided.</p>
+            {% endif %}
             <a href="{% url 'back_to_home' %}" class="button-link home-button" onclick="resetForm()">
                 Return to Home
             </a>
